@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import InfoHowItWorks from "~/components/homeComponent/infoHowItWorks/infoHowItWorks";
 import DataSources from "~/components/homeComponent/dataSources/DataSources";
 import HeroSearch from "~/components/homeComponent/heroSection/heroSearch"
-import './MainContent.css';
 import {initialModels} from "~/components/homeComponent/modelsInfo/models";
+import './MainContent.css';
 
 interface Model {
     id: string;
@@ -16,20 +17,25 @@ interface Model {
 const MainContent: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [models, setModels] = useState<Model[]>(initialModels);
+    const api = axios.create({
+        baseURL: import.meta.env.VITE_API_URL || '/api',
+        timeout: 10000
+    });
 
-    const handleSearch = (e: React.FormEvent) => {
+    const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
-        const activatedModels: Model[] = models.filter((model: Model) => model.selected);
 
-        if (searchQuery.trim()) {
-            if (activatedModels.length == 0) {
-                alert("Вам будет продемонстрирована только информация из источников! Выберите модель, если хотите получить результат!");
+        try {
+            const { data } = await api.post('/search', {
+                inn: searchQuery,
+                models: models.filter(m => m.selected).map(m => m.id)
+            });
+
+            console.log(data);
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                alert(`Ошибка: ${error.response?.data?.message || error.message}`);
             }
-
-            console.log('Поиск: ', searchQuery.trim());
-            console.log(activatedModels);
-        } else {
-            alert("Введите номер ИНН!");
         }
     };
 
