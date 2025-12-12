@@ -1,0 +1,175 @@
+
+
+.hero-section {
+    padding: 60px 0 40px;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1a237e;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: #5f6368;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+}
+
+.hero-search-container {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.quick-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a237e;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #5f6368;
+}
+
+/* Как это работает */
+.how-it-works {
+    padding: 60px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.how-it-works h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a237e;
+    font-size: 2rem;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.step {
+    text-align: center;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 20px;
+}
+
+.step h3 {
+    margin-bottom: 10px;
+    color: #1a237e;
+}
+
+.step p {
+    color: #5f6368;
+    line-height: 1.5;
+}
+
+/* Источники данных */
+.data-sources {
+    padding: 60px 0;
+    border-top: 1px solid #e0e0e0;
+}
+
+.data-sources h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1a237e;
+    font-size: 2rem;
+}
+
+.sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.source-item {
+    text-align: center;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.source-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.source-item h3 {
+    margin-bottom: 10px;
+    color: #1a237e;
+}
+
+.source-item p {
+    color: #5f6368;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .steps,
+    .sources-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-stats {
+        gap: 30px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+}
