@@ -82,3 +82,17 @@
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
 }
+
+@media (max-width: 899px) {
+    .search-input {
+        min-width: 100%;
+    }
+
+    .search-form {
+        display: block;
+    }
+
+    .search-button {
+        margin-top: 10px;
+    }
+}

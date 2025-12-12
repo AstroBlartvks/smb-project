@@ -1,8 +1,7 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import './ModelsInfo.css';
 import ModelGrid from "~/components/homeComponent/modelsInfo/modelGrid";
-import {initialModels} from "~/components/homeComponent/modelsInfo/models";
 import ModelController from "~/components/homeComponent/modelsInfo/modelController";
 
 interface Model {
@@ -13,8 +12,14 @@ interface Model {
     selected: boolean;
 }
 
-const ModelsInfo: React.FC = () => {
-    const [models, setModels] = useState<Model[]>(initialModels);
+
+interface ModelsInfoProps {
+    models: Model[];
+    setModels: (value: (((prevState: Model[]) => Model[]) | Model[])) => void;
+}
+
+
+const ModelsInfo: React.FC<ModelsInfoProps> = ({models, setModels}) => {
 
     const toggleModel = (id: string) => {
         setModels(models.map(model =>

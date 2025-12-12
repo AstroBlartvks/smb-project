@@ -9,13 +9,17 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@react-input/mask": "^2.0.4",
     "@react-router/node": "7.10.1",
     "@react-router/serve": "7.10.1",
     "@reduxjs/toolkit": "^2.11.1",
     "isbot": "^5.1.31",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-router": "7.10.1"
+    "react-input-mask": "^3.0.0-alpha.2",
+    "react-redux": "^9.2.0",
+    "react-router": "7.10.1",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@react-router/dev": "7.10.1",
@@ -23,6 +27,7 @@
     "@types/node": "^22",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@types/react-input-mask": "^3.0.6",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
     "vite": "^7.1.7",

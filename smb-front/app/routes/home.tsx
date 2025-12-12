@@ -13,16 +13,13 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-    const handleSearch = (query: string) => {
-        console.log('Поиск:', query);
-    };
 
     return (
         <div className="home-page">
             <Header />
 
             <main className="main-content">
-                <MainContent onSearch={handleSearch}/>
+                <MainContent/>
             </main>
 
             <footer className="footer">
