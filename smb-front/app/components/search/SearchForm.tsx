@@ -18,7 +18,7 @@ const SearchForm: React.FC<SearchFormProp> = ({ searchQuery, setSearchQuery, han
 
                 <InputMask
                     className="search-input"
-                    mask="__ __ ______ __" replacement={{ _: /\d/ }}
+                    mask="__ __ ______" replacement={{ _: /\d/ }}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />

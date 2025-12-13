@@ -18,20 +18,28 @@ const MainContent: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [models, setModels] = useState<Model[]>(initialModels);
     const api = axios.create({
-        baseURL: import.meta.env.VITE_API_URL || '/api',
+        baseURL: import.meta.env.VITE_API_URL || '/api/',
         timeout: 10000
     });
 
     const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (searchQuery.length != 12) {
+            alert("Длина ИНН юридического лица должна быть 10 цифр!");
+            return;
+        }
+
         try {
-            const { data } = await api.post('/search', {
-                inn: searchQuery,
+            const toSendData = {
+                TaxpayerIdentificationNumber: searchQuery,
                 models: models.filter(m => m.selected).map(m => m.id)
-            });
+            }
+
+            const { data } = await api.post('/search', toSendData);
 
             console.log(data);
+
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 alert(`Ошибка: ${error.response?.data?.message || error.message}`);
