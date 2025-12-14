@@ -13,13 +13,16 @@ import java.util.Map;
 
 @Service
 public class SearchInfoService {
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new  ObjectMapper();
+    private final ContrAgentsService contrAgentsService;
+    private final GetCompanyInfoService getCompanyInfoService;
 
     @Autowired
-    private ContrAgentsService contrAgentsService;
-
-    @Autowired
-    private GetCompanyInfoService getCompanyInfoService;
+    public SearchInfoService(ContrAgentsService contrAgentsService,
+                             GetCompanyInfoService getCompanyInfoService) {
+        this.contrAgentsService = contrAgentsService;
+        this.getCompanyInfoService = getCompanyInfoService;
+    }
 
     public SearchResponse search(SearchRequest request) {
         String result;
