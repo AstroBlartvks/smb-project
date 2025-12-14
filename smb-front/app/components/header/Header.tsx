@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Header.css';
 import Logotype from '../logo/Logotype';
+import {Link} from "react-router";
 
 interface HeaderProps {
     onMenuToggle?: () => void;
@@ -26,9 +27,9 @@ const Header: React.FC<HeaderProps> = ({  }) => {
                 </button>
 
                 <nav className={`nav ${isGuideMenuOpen ? 'nav-open' : ''}`}>
-                    <a href="#" className="nav-link active">Главная</a>
-                    <a href="#analytics" className="nav-link">Аналитика</a>
-                    <a href="#companies" className="nav-link">Компании</a>
+                    <Link className="nav-link" to={"/"}>Главная </Link>
+                    <Link className="nav-link" to={"/analytics"}>Аналитика </Link>
+                    <Link className="nav-link" to={"/companies"}>Компании </Link>
                 </nav>
 
             </div>

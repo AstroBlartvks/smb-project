@@ -5,6 +5,7 @@ import DataSources from "~/components/homeComponent/dataSources/DataSources";
 import HeroSearch from "~/components/homeComponent/heroSection/heroSearch"
 import {initialModels} from "~/components/homeComponent/modelsInfo/models";
 import './MainContent.css';
+import {useNavigate} from "react-router";
 
 interface Model {
     id: string;
@@ -15,6 +16,7 @@ interface Model {
 }
 
 const MainContent: React.FC = () => {
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [models, setModels] = useState<Model[]>(initialModels);
     const api = axios.create({
@@ -37,8 +39,7 @@ const MainContent: React.FC = () => {
             }
 
             const { data } = await api.post('/search', toSendData);
-
-            console.log(data);
+            navigate('/result', { state: { results: data, query: searchQuery } });
 
         } catch (error) {
             if (axios.isAxiosError(error)) {
