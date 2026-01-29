@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class GetCompanyInfoService {
 
-    public Map<String, String> parseCompanyInfoFromPage(String url) throws IOException, InfoOfThisCompanyIsBadException {
+    public Map<String, Object> parseCompanyInfoFromPage(String url) throws IOException, InfoOfThisCompanyIsBadException {
         Document doc = Jsoup.connect(url)
                 .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
                 .timeout(10000)
@@ -72,8 +72,8 @@ public class GetCompanyInfoService {
     }
 
 
-    private Map<String, String> parseTable(Element table) {
-        Map<String, String> result = new HashMap<>();
+    private Map<String, Object> parseTable(Element table) {
+        Map<String, Object> result = new HashMap<>();
 
         Elements rows = table.select("tr");
 

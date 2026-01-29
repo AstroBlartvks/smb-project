@@ -1,9 +1,2 @@
-com\astro\exceptions\InfoOfThisCompanyIsBadException.class
-com\astro\dto\SearchResponse.class
-com\astro\dto\SearchRequest.class
-com\astro\exceptions\TaxpayerIdNumberIsBadException.class
-com\astro\controller\SearchController.class
-com\astro\service\GetCompanyInfoService.class
-com\astro\service\ContrAgentsService.class
 com\astro\DemoApplication.class
-com\astro\service\SearchInfoService.class
+com\astro\controller\AnalysisController.class

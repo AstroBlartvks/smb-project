@@ -1,0 +1,13 @@
+{
+  "revenue": 15000000.0,
+  "net_profit": 500000.0,
+  "total_assets": 10000000.0,
+  "total_liabilities": 6000000.0,
+  "current_assets": 5000000.0,
+  "current_liabilities": 3000000.0,
+  "equity": 4000000.0,
+  "region": "Москва",
+  "industry": "Торговля",
+  "company_age": 5,
+  "authorized_capital": 100000.0
+}

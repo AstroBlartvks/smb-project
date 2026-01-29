@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class SearchInfoService {
-    private final ObjectMapper mapper = new  ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
     private final ContrAgentsService contrAgentsService;
     private final GetCompanyInfoService getCompanyInfoService;
 
@@ -29,7 +30,7 @@ public class SearchInfoService {
 
         try {
             String uri = contrAgentsService.getURI(request.TaxpayerIdentificationNumber().replace(" ", ""));
-            Map<String, String> info = getCompanyInfoService.parseCompanyInfoFromPage(uri);
+            Map<String, Object> info = getCompanyInfoService.parseCompanyInfoFromPage(uri);
             result = mapper.writeValueAsString(info);
         } catch (TaxpayerIdNumberIsBadException | InfoOfThisCompanyIsBadException e) {
             return new SearchResponse(e.getMessage());
@@ -38,5 +39,9 @@ public class SearchInfoService {
         }
 
         return new SearchResponse(result);
+    }
+
+    public Map<String, Object> getInfoMap(SearchRequest request) throws IOException {
+        return new HashMap<String, Object>() {{}};
     }
 }
