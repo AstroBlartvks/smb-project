@@ -1,7 +1,7 @@
+import {useLocation, useNavigate} from "react-router";
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
 import Header from "~/components/header/Header";
-import './ResultPage.css';
+import './ResultPage.css'
 
 interface ResultState {
     results: any;
@@ -15,6 +15,7 @@ interface CompanyData {
 const ResultPage: React.FC = () => {
     const location = useLocation();
     const state = location.state as ResultState;
+    const navigate = useNavigate();
     const [companyData, setCompanyData] = useState<CompanyData>({});
     const [loading, setLoading] = useState(true);
 
@@ -35,6 +36,7 @@ const ResultPage: React.FC = () => {
                 }
                 setCompanyData(parsedData);
             } catch (error) {
+                console.log(state.results);
                 console.error('Ошибка парсинга данных:', error);
                 setCompanyData({});
             }
@@ -42,103 +44,38 @@ const ResultPage: React.FC = () => {
         }
     }, [state]);
 
-    if (!state) {
-        return (
-            <div className="home-page">
-                <Header />
-                <div className="no-data">
-                    <h2>Нет данных для отображения</h2>
-                    <p>Пожалуйста, выполните поиск для получения информации о компании</p>
-                </div>
-            </div>
-        );
+    if (!companyData) {
+        return <div>No data available</div>;
     }
 
-    const { query } = state;
+    const parsedData = typeof companyData === 'string' ? JSON.parse(companyData) : companyData;
+    const inn = state.query.replace(" ", "").replace("%20", "");
 
-    const fieldOrder = [
-        'Сокращённое наименование',
-        'Полное наименование',
-        'Дата регистрации',
-        'Статус',
-        'Статус по ЕГРЮЛ',
-        'Регион',
-        'Уставный капитал'
-    ];
-
-    const sortedFields = fieldOrder
-        .filter(field => companyData[field])
-        .map(field => ({
-            key: field,
-            value: companyData[field]
-        }));
+    const handleDetailedAnalysis = () => {
+        console.log(inn.replace(" ", ""));
+        navigate(`/analysis/${inn}`);
+    };
 
     return (
-        <div className="home-page">
-            <Header />
-
+        <>
+            <Header/>
             <div className="result-container">
-                <div className="result-header">
-                    <h1 className="result-title">Результаты поиска</h1>
-                    <div className="result-query">
-                        <span className="query-label">ИНН компании:</span>
-                        <span className="query-value">{query}</span>
-                    </div>
-                </div>
+                <h1>Company Information</h1>
+                <pre>{JSON.stringify(parsedData, null, 2)}</pre>
 
-                {loading ? (
-                    <div className="loading-container">
-                        <div className="loading-spinner"></div>
-                        <p>Загрузка данных...</p>
-                    </div>
-                ) : sortedFields.length > 0 ? (
-                    <div className="company-info-card">
-                        <div className="company-info-header">
-                            <h2 className="company-name">
-                                {companyData['Сокращённое наименование'] ||
-                                    companyData['Полное наименование'] ||
-                                    'Информация о компании'}
-                            </h2>
-                            {companyData['Статус'] && (
-                                <span className={`status-badge ${companyData['Статус'].includes('Действует') ? 'status-active' : 'status-inactive'}`}>
-                                    {companyData['Статус']}
-                                </span>
-                            )}
-                        </div>
-
-                        <div className="company-info-table">
-                            {sortedFields.map((field, index) => (
-                                <div key={field.key} className={`info-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                                    <div className="info-label">{field.key}</div>
-                                    <div className="info-value">{field.value}</div>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="company-info-footer">
-                            <div className="info-note">
-                                <span>Данные актуальны на момент запроса</span>
-                            </div>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="error-message">
-                        <h3>Не удалось загрузить данные о компании</h3>
-                        <p>Попробуйте выполнить поиск еще раз или проверьте корректность введенного ИНН</p>
-                    </div>
-                )}
-
-                <div className="result-actions">
-                    <button
-                        className="back-button"
-                        onClick={() => window.history.back()}
-                    >
-                        ← Вернуться к поиску
+                {inn && (
+                    <button onClick={handleDetailedAnalysis} className="detailed-analysis-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                        Detailed ML Analysis
                     </button>
-                </div>
+                )}
             </div>
-        </div>
+        </>
     );
-};
+}
+
 
 export default ResultPage;
